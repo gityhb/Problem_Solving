@@ -1,6 +1,5 @@
 import sys
 
-
 try:
     N = int(sys.stdin.readline())
 except:
@@ -18,3 +17,4 @@ numbers.sort()
 output = '\n'.join(map(str, numbers))
 
 sys.stdout.write(output + '\n')
+
