@@ -1,46 +1,33 @@
 import sys
 
-# 최대 1,000,000개의 수를 처리해야 하므로
-# 빠른 입력을 위해 sys.stdin.readline을 사용합니다.
+# 1. 수의 개수 N을 입력받습니다.
+# 입력 속도 향상을 위해 sys.stdin.readline()을 사용합니다.
+# 입력 끝에 붙는 공백/줄바꿈 문자를 제거하지 않고 바로 int()로 변환합니다.
+try:
+    # N을 입력받지 못하면 0으로 처리합니다.
+    N = int(sys.stdin.readline())
+except:
+    N = 0
 
-def solve():
-    """
-    N개의 수를 입력받아 오름차순으로 정렬하고 출력합니다.
-    """
-    # 첫째 줄에서 수의 개수 N을 읽습니다.
+# 2. N개의 수를 읽어 리스트에 저장합니다.
+numbers = []
+for _ in range(N):
     try:
-        # 공백 없이 줄바꿈으로 N이 주어지므로, strip()으로 혹시 모를 공백을 제거합니다.
-        N = int(sys.stdin.readline().strip())
+        # 한 줄씩 수를 읽어 리스트에 추가합니다.
+        numbers.append(int(sys.stdin.readline()))
     except:
-        # 입력 오류 시 종료
-        return
+        # 입력 오류 발생 시 건너뜁니다.
+        continue
 
-    # N개의 수를 저장할 리스트
-    numbers = []
-    
-    # N개의 줄에서 각각의 수를 읽어 리스트에 추가합니다.
-    for _ in range(N):
-        try:
-            # sys.stdin.readline()으로 한 줄씩 빠르게 읽습니다.
-            number = int(sys.stdin.readline().strip())
-            numbers.append(number)
-        except:
-            # 입력 오류 발생 시, 해당 입력은 건너뜁니다.
-            continue
-            
-    # --- 핵심 로직 ---
-    
-    # 파이썬의 내장 정렬 함수인 sorted()를 사용합니다.
-    # 이는 TimSort 알고리즘 (O(N log N))으로 구현되어 가장 빠르고 효율적입니다.
-    numbers.sort()
-    
-    # --- 출력 ---
-    
-    # 정렬된 결과를 한 줄에 하나씩 출력합니다.
-    # 출력 속도 향상을 위해 print() 대신 sys.stdout.write를 사용할 수도 있습니다.
-    # 하지만 print()도 파이썬 3에서는 충분히 빠릅니다.
-    for number in numbers:
-        print(number)
+# 3. 리스트를 오름차순으로 정렬합니다.
+# 파이썬의 내장 .sort() 함수는 매우 빠릅니다.
+numbers.sort()
 
-if __name__ == "__main__":
-    solve()
+# 4. 정렬된 결과를 한 번에 출력합니다.
+# 정렬된 숫자들을 문자열로 변환하고 줄바꿈 문자('\n')로 모두 연결합니다.
+# 이렇게 한 번에 출력하는 것이 반복문에서 print()를 여러 번 호출하는 것보다 빠릅니다.
+output = '\n'.join(map(str, numbers))
+
+# sys.stdout.write()를 사용하여 결과를 출력합니다.
+# 마지막에 줄바꿈 문자를 한 번 더 추가하여 출력을 마무리합니다.
+sys.stdout.write(output + '\n')
