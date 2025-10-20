@@ -1,28 +1,37 @@
 import sys
-sys.setrecursionlimit(10**6)
+
+A = []
+tmp = []
+result = 0  #inversion(Swap) 횟수를 저장할 변수
 
 def merge_sort(s, e):
-    global result, A, tmp
-    if e - s < 1:
-        return
-    m = s + (e - s) // 2
-    merge_sort(s, m)
-    merge_sort(m + 1, e)
+    global A, tmp, result
 
-    for i in range(s, e + 1):
+    if e-s < 1:
+        return
+    
+    #분할
+    m = (s + e) // 2
+    merge_sort(s, m)
+    merge_sort(m+1, e)
+
+    #병합
+    for i in range(s, e+1):
         tmp[i] = A[i]
 
     k = s
     index1 = s
-    index2 = m + 1
+    index2 = m+1
 
     while index1 <= m and index2 <= e:
         if tmp[index1] > tmp[index2]:
             A[k] = tmp[index2]
-            result += (index2 - k)  # 역순쌍 카운트
+
+            result += (index2 - k)
+
             k += 1
             index2 += 1
-        else:
+        else: 
             A[k] = tmp[index1]
             k += 1
             index1 += 1
@@ -31,19 +40,21 @@ def merge_sort(s, e):
         A[k] = tmp[index1]
         k += 1
         index1 += 1
-
+    
     while index2 <= e:
         A[k] = tmp[index2]
         k += 1
         index2 += 1
 
+N = int(sys.stdin.readline())
 
-if __name__ == "__main__":
-    input = sys.stdin.readline
-    N = int(input().strip())
-    A = [0] + list(map(int, input().split()))  # 1-indexed
-    tmp = [0] * (N + 1)
-    result = 0
+A = [0] * (N+1)
+tmp = [0] * (N+1)
 
-    merge_sort(1, N)
-    print(result)
+inputs =list(map(int, sys.stdin.readline().split()))
+for i in range(N):
+    A[i+1] = inputs[i]
+
+merge_sort(1, N)
+
+print(result)
