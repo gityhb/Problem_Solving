@@ -1,30 +1,29 @@
 import sys
-
+ 
 N = int(sys.stdin.readline())
-
-stack = []
 result = []
+stack = []
 count = 1
-possible = True # 가능 여부를 저장할 변수
+possible = True
 
-for _ in range(N):
-    number = int(sys.stdin.readline())
+for i in range(N):
+    num = int(sys.stdin.readline())
 
-    while number >= count:
+    while num >= count:
         stack.append(count)
         result.append('+')
-        count += 1
-
-    if stack[-1] == number:
-        stack.pop() #<-- 여기를 수정! 인자 없이 사용
+        count+=1
+    
+    if stack[-1] == num:
+        stack.pop()
         result.append('-')
+   
     else:
-        possible = False # 불가능하다고 표시
-        break # 더 이상 진행할 필요 없으므로 반복문 탈출
+        possible = False
+        break
 
-# 반복문이 모두 끝난 후 마지막에 한 번만 출력
 if not possible:
     print('NO')
 else:
-    for op in result:
-        print(op)
+    for i in result:
+        print(i)
