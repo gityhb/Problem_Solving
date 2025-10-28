@@ -1,17 +1,12 @@
 import sys
+from collections import deque
 
 N = int(sys.stdin.readline())
 
-card_list = list(range(1, N+1))
+queue = deque(range(1, N+1))
 
-front_index = 0
+while len(queue)>1:
+    queue.popleft()
+    queue.append(queue.popleft())
 
-while len(card_list) - front_index > 1:
-    front_index += 1
-
-    card_move = card_list[front_index]
-    front_index += 1
-
-    card_list.append(card_move)
-
-print(card_list[front_index])
+print(queue[0])
