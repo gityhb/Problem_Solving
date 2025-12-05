@@ -6,29 +6,29 @@ tree = {}
 
 for _ in range(N):
     root, left, right = sys.stdin.readline().split()
-    tree[root] = [left, right] #{'A' = ['B', 'C'], 'B': ['D',...]}
 
-def order1(node):
-    if node == '.':
+    tree[root] = [left, right]
+
+def order1(root):
+    if root == '.':
         return
-    print(node, end='') #루트
-    order1(tree[node][0]) #왼쪽
-    order1(tree[node][1]) #오른쪽
+    print(root, end="")
+    order1(tree[root][0])
+    order1(tree[root][1])
 
-def order2(node):
-    if node == '.':
+def order2(root):
+    if root == '.':
         return
-    order2(tree[node][0]) #왼쪽
-    print(node, end='') #루트
-    order2(tree[node][1]) #오른쪽
+    order2(tree[root][0])
+    print(root, end="")
+    order2(tree[root][1])
 
-
-def order3(node):
-    if node == '.':
+def order3(root):
+    if root == '.':
         return
-    order3(tree[node][0]) #왼쪽
-    order3(tree[node][1]) #오른쪽
-    print(node, end='') #루트
+    order3(tree[root][0])
+    order3(tree[root][1])
+    print(root, end="")
 
 order1('A')
 print()
