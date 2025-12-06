@@ -2,12 +2,11 @@ import sys
 
 n = int(sys.stdin.readline())
 
-arr = [1]*46
+fib = [0] * (n+1)
 
-arr[0] = 0
-arr[1] = 1
+fib[1]=1
 
-for i in range(2, 46):
-    arr[i] = arr[i-1] + arr[i-2]
+for i in range(2, n+1):
+    fib[i] = fib[i-2]+fib[i-1]
 
-print(arr[n])
+print(fib[n])
