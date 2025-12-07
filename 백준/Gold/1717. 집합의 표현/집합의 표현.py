@@ -1,38 +1,40 @@
 import sys
+sys.setrecursionlimit(10**6)
 
 n, m = map(int, sys.stdin.readline().split())
 
-parent = [i for i in range(n+1)]
+parent = [i for i in range(n+1)] #부모 배열
 
+def find(x):
+    if parent[x] != x:
+        parent[x] = find(parent[x])
 
-def union (a, b):
-    #각각 대표노드 찾음
-    rootA = find(a)
-    rootB = find(b)
+    return parent[x]
 
-    #다르면 하나를 다른쪽에 연결
-    if rootA != rootB:
-        parent[rootB] = rootA
+def union(a, b):
+    a1 = find(a) #a의 부모 반환
+    b1 = find(b) #b의 부모 반환
 
-def find(a):
-    #자신이 루트노드라면 그 값 반환
-    if a == parent[a]:
-        return a
-    #루트 찾을 때까지 재귀 호출 후 결과 부모 테이블에 갱신
+    if a1<b1:
+        parent[b1] = a1
     else:
-        parent[a] = find(parent[a])
-        return parent[a]
+        parent[a1] = b1
     
-def checkSame(a, b):
-    if find(a) == find(b):
-        print("YES")
-    else:
-        print("NO")
-        
-for _ in range(m):
-    k, a, b = map(int,sys.stdin.readline().split())
+result = []
 
-    if k==0:
+for _ in range(m):
+    what, a, b = map(int, sys.stdin.readline().split())
+
+    if what==0:
         union(a, b)
-    else:
-        checkSame(a, b)
+
+    elif what==1:
+        find(a)
+        find(b)
+        if find(a) == find(b):
+            result.append("YES")
+        else:
+            result.append("NO")
+
+for i in result:
+    print(i)
