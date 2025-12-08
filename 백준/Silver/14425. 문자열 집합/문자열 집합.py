@@ -2,21 +2,19 @@ import sys
 
 N, M = map(int, sys.stdin.readline().split())
 
-list = set()
-find_list = []
+strings = set()
+find = []
 
-for i in range(N):
-    string = sys.stdin.readline()
-    list.add(string)
+for _ in range(N):
+    strings.add(sys.stdin.readline())
 
-for i in range(M):
-    find = sys.stdin.readline()
-    find_list.append(find)
+for _ in range(M):
+    find.append(sys.stdin.readline())
 
 count = 0
 
-for check in find_list:
-    if check in list:
-        count += 1
+for aa in find:
+   if aa in strings:
+        count+=1
 
 print(count)
