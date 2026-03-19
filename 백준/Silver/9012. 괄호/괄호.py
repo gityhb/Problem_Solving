@@ -4,27 +4,23 @@ T = int(sys.stdin.readline())
 result = []
 
 for _ in range(T):
-    PS = sys.stdin.readline().strip()
-    stack= []
+    stack = []
+    a = sys.stdin.readline().strip()
     vps = True
 
-    for char in PS:
-        if char == '(':
-            stack.append('char')
-        
-        elif char == ')':
+    for i in a:
+        if i == "(":
+            stack.append(i)
+        else:
             if not stack:
                 vps = False
                 break
-            else: stack.pop()
-        
-    if stack:
-        vps = False
+            else:
+                stack.pop()
     
-    if vps:
+    if vps and not stack:
         result.append("YES")
-    else:
-        result.append("NO")
+    else: result.append("NO")
 
-for res in result:
-    print(res)
+for i in result:
+    print(i)
