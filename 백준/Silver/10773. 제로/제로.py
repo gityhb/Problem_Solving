@@ -1,15 +1,19 @@
 import sys
 
 K = int(sys.stdin.readline())
-stack=[]
+stack = []
 
 for _ in range(K):
-    number = int(sys.stdin.readline())
+    a = int(sys.stdin.readline())
 
-    if number == 0:
+    if a == 0:
         stack.pop()
-    
     else:
-        stack.append(number)
-    
-print(sum(stack))
+        stack.append(a)
+
+hap = 0
+
+for i in stack:
+    hap += int(i)
+
+print(hap)
