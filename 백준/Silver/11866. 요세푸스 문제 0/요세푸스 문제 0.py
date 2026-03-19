@@ -1,19 +1,20 @@
 import sys
 from collections import deque
 
-N, K = map(int, sys.stdin.readline().split())
-
-result = []
 queue = deque()
+
+N, K = map(int, sys.stdin.readline().split())
 
 for i in range(1, N+1):
     queue.append(i)
 
-while queue:
+result = []
+
+while(len(queue)>=1):
     for _ in range(K-1):
-        queue.append(queue.popleft())
+        a = queue.popleft()
+        queue.append(a)
+    b=queue.popleft()
+    result.append(b)
 
-    result.append(queue.popleft())
-
-str_result = map(str, result)
-print(f"<{', '.join(str_result)}>")
+print("<" + ", ".join(map(str, result)) + ">")
