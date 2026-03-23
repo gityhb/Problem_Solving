@@ -1,20 +1,15 @@
 import sys
 
-try:
-    N = int(sys.stdin.readline())
-except:
-    N = 0
+N = int(sys.stdin.readline())
 
-numbers = []
+list1 = []
+
 for _ in range(N):
-    try:
-        numbers.append(int(sys.stdin.readline()))
-    except:
-        continue
+    num = int(sys.stdin.readline())
+    
+    list1.append(num)
 
-numbers.sort()
+list1.sort()
 
-output = '\n'.join(map(str, numbers))
-
-sys.stdout.write(output + '\n')
-
+for k in list1:
+    print(k)
