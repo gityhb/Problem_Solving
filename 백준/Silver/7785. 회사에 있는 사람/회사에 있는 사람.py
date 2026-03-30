@@ -1,16 +1,17 @@
 import sys
 
 n = int(sys.stdin.readline())
-
-S = set()
+en = set()
 
 for _ in range(n):
-    name, status = sys.stdin.readline().split()
+    name, el = map(str, sys.stdin.readline().split())
+    if el == "enter":
+        en.add(name)
+    elif el == "leave":
+        if name in en:
+            en.remove(name)
 
-    if status == "enter":
-        S.add(name)
-    else:
-        S.remove(name)
-    
-for i in sorted(S, reverse=True):
+s = sorted(en, reverse=True)
+
+for i in s:
     print(i)
