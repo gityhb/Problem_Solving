@@ -1,28 +1,26 @@
 import sys
-sys.setrecursionlimit(10**6)
+from collections import deque
 
-N = int(sys.stdin.readline())
-M = int(sys.stdin.readline())
+num = int(sys.stdin.readline())
+t = int(sys.stdin.readline())
 
-graph = [[] for _ in range(N+1)]
+visited = [False] * (num+1)
 
-for _ in range(M):
-    u, v = map(int, sys.stdin.readline().split())
-    graph[u].append(v)
-    graph[v].append(u)
+graph = [[] * (num+1) for _ in range(num+1)]
 
-visited = [False] * (N+1)
-count = 0
+for _ in range(t):
+    a, b = map(int, sys.stdin.readline().split())
+    graph[a].append(b)
+    graph[b].append(a)
 
-def dfs(node):
-    global count
-    visited[node] = True
+def dfs(start):
+    visited[start] = True
 
-    for next in graph[node]:
+    for next in graph[start]:
         if not visited[next]:
-            count+=1
+            visited[next] = True
             dfs(next)
-    
+
 dfs(1)
 
-print(count)
+print(visited.count(True)-1)
