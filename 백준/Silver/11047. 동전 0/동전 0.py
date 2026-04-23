@@ -1,20 +1,17 @@
 import sys
 
 N, K = map(int, sys.stdin.readline().split())
-
 coins = []
-for _ in range(N):
-    coins.append(int(sys.stdin.readline()))
-
-coins.sort(reverse=True) #큰순으로 정렬
-
 count = 0
 
-for coin in coins:
-    if K==0: break
-    if K>=coin:
-        count = K//coin + count
-        K = K%coin
+for _ in range(N):
+    d = int(sys.stdin.readline())
+    coins.append(d)
 
-
-print(count)
+for i in reversed(range(N)):
+    if coins[i] <= K:
+        count += (K//coins[i])
+        K = K % coins[i]
+    if K == 0:
+        print(count)
+        break
