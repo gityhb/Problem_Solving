@@ -1,26 +1,32 @@
 import sys
 from collections import deque
 
-num = int(sys.stdin.readline())
-t = int(sys.stdin.readline())
+com = int(sys.stdin.readline())
+line = int(sys.stdin.readline())
 
-visited = [False] * (num+1)
+graph = [[] for _ in range(com+1)]
+visited = [False] * (com+1)
 
-graph = [[] * (num+1) for _ in range(num+1)]
-
-for _ in range(t):
+for _ in range(line):
     a, b = map(int, sys.stdin.readline().split())
     graph[a].append(b)
     graph[b].append(a)
 
-def dfs(start):
+
+def bfs(start):
+    num = 0
+    queue = deque()
+    queue.append(start)
     visited[start] = True
 
-    for next in graph[start]:
-        if not visited[next]:
-            visited[next] = True
-            dfs(next)
+    while queue:
+        d = queue.popleft()
+        for next in graph[d]:
+            if not visited[next]:
+                num += 1
+                visited[next] = True
+                queue.append(next)
+     
+    return num
 
-dfs(1)
-
-print(visited.count(True)-1)
+print(bfs(1))
